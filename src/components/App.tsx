@@ -27,7 +27,12 @@ function App() {
                     tempState[action.id] = { ...tempState[action.id], name: action.payload }
                 }
                 else {
-                    tempState.push({ id: action.id | state.length, name: action.payload, isCheck: false })
+                    tempState.push({
+                        id: action.id | state.length,
+                        name: action.payload,
+                        isCheck: false,
+                        toggleAll: false
+                    })
                 }
                 return tempState
             case 'CHECK_TODO':
@@ -45,6 +50,15 @@ function App() {
                 return state.filter((item: any, index: any) => index !== action.id)
             case 'CLEAR_TODOS':
                 return []
+            case 'ON_OFF':
+                const newState = state.map((item: any) => {
+                    item.toggleAll = !item.toggleAll
+                    return item
+                })
+                return newState.map((item: any) => {
+                    item.isCheck = item.toggleAll
+                    return item
+                })
         }
     }, [])
 
@@ -82,6 +96,7 @@ function App() {
                 />
             </form>
             <button onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear</button>
+            <button onClick={() => dispatch({ type: 'ON_OFF' })}>On/Off</button>
             <ul>{todos}</ul>
         </div>
     )
