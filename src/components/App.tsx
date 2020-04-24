@@ -43,6 +43,8 @@ function App() {
                 return state
             case 'DELETE_TODO':
                 return state.filter((item: any, index: any) => index !== action.id)
+            case 'CLEAR_TODOS':
+                return []
         }
     }, [])
 
@@ -79,6 +81,7 @@ function App() {
                     ref={inputRef}
                 />
             </form>
+            <button onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear</button>
             <ul>{todos}</ul>
         </div>
     )
