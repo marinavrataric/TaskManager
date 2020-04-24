@@ -41,28 +41,31 @@ function App() {
                 inputRef.current.focus()
                 inputRef.current.value = action.payload
                 return state
+            case 'DELETE_TODO':
+                return state.filter((item: any, index: any) => index !== action.id)
         }
     }, [])
 
-    const handleEditing = (index: number, item: {name: string}) => {
+    const handleEditing = (index: number, item: { name: string }) => {
         setEditingIndex(index);
-        dispatch({ 
-            type: 'EDIT_TODO', 
-            id: index, 
-            payload: item.name 
-        }) 
+        dispatch({
+            type: 'EDIT_TODO',
+            id: index,
+            payload: item.name
+        })
     }
 
     const todos = todo.map((item: any, index: number) => {
         return (
             <li key={index}>
-                <input 
-                    type="checkbox" 
-                    checked={item.isCheck} 
-                    onChange={() => dispatch({ type: "CHECK_TODO", id: index })} 
+                <input
+                    type="checkbox"
+                    checked={item.isCheck}
+                    onChange={() => dispatch({ type: "CHECK_TODO", id: index })}
                 />
                 {item.name}
                 <button onClick={() => handleEditing(index, item)}>/</button>
+                <button onClick={() => dispatch({ type: 'DELETE_TODO', id: index })}>x</button>
             </li>
         )
     })
