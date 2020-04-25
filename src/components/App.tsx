@@ -1,6 +1,6 @@
 import React, { useRef, useReducer, useState } from 'react'
 
-function App() {
+export default function App() {
 
     const inputRef = useRef<HTMLInputElement | any>(null)
 
@@ -19,6 +19,7 @@ function App() {
     const [editingIndex, setEditingIndex] = useState<null | number>(null)
 
     const [todo, dispatch] = useReducer((state: any, action: any): any => {
+        
         switch (action.type) {
             case 'ADD_TODO':
                 setEditingIndex(null)
@@ -59,6 +60,8 @@ function App() {
                     item.isCheck = item.toggleAll
                     return item
                 })
+            default: 
+                return state 
         }
     }, [])
 
@@ -71,13 +74,17 @@ function App() {
         })
     }
 
+    const [selected, setSelected] = useState('all')
+
     const todos = todo.map((item: any, index: number) => {
+        if(selected === 'active' && item.isCheck) return null
+        if(selected === 'complete' && !item.isCheck) return null
         return (
             <li key={index}>
                 <input
                     type="checkbox"
                     checked={item.isCheck}
-                    onChange={() => dispatch({ type: "CHECK_TODO", id: index })}
+                    onChange={() => dispatch({ type: 'CHECK_TODO', id: index })}
                 />
                 {item.name}
                 <button onClick={() => handleEditing(index, item)}>/</button>
@@ -97,9 +104,14 @@ function App() {
             </form>
             <button onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear</button>
             <button onClick={() => dispatch({ type: 'ON_OFF' })}>On/Off</button>
+
+            <select value={selected} onChange={(e: any) => setSelected(e.target.value)}>
+                <option value="choose" selected>Choose</option>
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="complete">Completed</option>
+            </select>
             <ul>{todos}</ul>
         </div>
     )
 }
-
-export default App
