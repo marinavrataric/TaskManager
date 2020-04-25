@@ -86,26 +86,29 @@ export default function App() {
                     checked={item.isCheck}
                     onChange={() => dispatch({ type: 'CHECK_TODO', id: index })}
                 />
-                {item.name}
-                <button onClick={() => handleEditing(index, item)}>/</button>
-                <button onClick={() => dispatch({ type: 'DELETE_TODO', id: index })}>x</button>
+                <p className="inline">{item.name}</p>
+                <button className="edit" onClick={() => handleEditing(index, item)}><i className="fa fa-pencil"></i></button>
+                <button className="delete" onClick={() => dispatch({ type: 'DELETE_TODO', id: index })}><i className="fa fa-trash"></i></button>
             </li>
         )
     })
 
     return (
-        <div>
+        <div className="App">
+            <h1>Task Manager</h1>
+            <p>You have {todo.length} {todo.length > 1 ? 'todos' : 'todo'}</p>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder='Buy milk'
                     ref={inputRef}
+                    className="input-text"
                 />
             </form>
-            <button onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear</button>
-            <button onClick={() => dispatch({ type: 'ON_OFF' })}>On/Off</button>
+            <button className="btn" onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear</button>
+            <button className="btn" onClick={() => dispatch({ type: 'ON_OFF' })}>On/Off</button>
 
-            <select value={selected} onChange={(e: any) => setSelected(e.target.value)}>
+            <select value={selected} onChange={(e: any) => setSelected(e.target.value)} className="select">
                 <option value="choose" selected>Choose</option>
                 <option value="all">All</option>
                 <option value="active">Active</option>
