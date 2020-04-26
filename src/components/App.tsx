@@ -109,7 +109,7 @@ export default function App() {
     return (
         <div className="App">
             <h1>Task Manager</h1>
-            <p className="num-todo">You have {todo.length} {todo.length > 1 ? 'todos' : 'todo'}</p>
+            <p className="num-todo">You have {todo.length} {todo.length > 1 ? 'tasks' : 'task'}</p>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
