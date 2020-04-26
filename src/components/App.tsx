@@ -19,7 +19,7 @@ export default function App() {
     const [editingIndex, setEditingIndex] = useState<null | number>(null)
 
     const [todo, dispatch] = useReducer((state: any, action: any): any => {
-        
+
         switch (action.type) {
             case 'ADD_TODO':
                 setEditingIndex(null)
@@ -60,8 +60,8 @@ export default function App() {
                     item.isCheck = item.toggleAll
                     return item
                 })
-            default: 
-                return state 
+            default:
+                return state
         }
     }, [])
 
@@ -77,16 +77,19 @@ export default function App() {
     const [selected, setSelected] = useState('all')
 
     const todos = todo.map((item: any, index: number) => {
-        if(selected === 'active' && item.isCheck) return null
-        if(selected === 'complete' && !item.isCheck) return null
+        if (selected === 'active' && item.isCheck) return null
+        if (selected === 'complete' && !item.isCheck) return null
         return (
             <li key={index}>
-                <input
-                    type="checkbox"
-                    checked={item.isCheck}
-                    onChange={() => dispatch({ type: 'CHECK_TODO', id: index })}
-                />
-                <p className="inline">{item.name}</p>
+                <label className="checkbox-label">
+                    <input
+                        type="checkbox"
+                        checked={item.isCheck}
+                        onChange={() => dispatch({ type: 'CHECK_TODO', id: index })}
+                    />
+                    <span className="checkbox-custom"></span>
+                </label>
+                <p {...item.isCheck ? { className: 'checked' } : { className: 'notChecked' }}>{item.name}</p>
                 <button className="edit" onClick={() => handleEditing(index, item)}><i className="fa fa-pencil"></i></button>
                 <button className="delete" onClick={() => dispatch({ type: 'DELETE_TODO', id: index })}><i className="fa fa-trash"></i></button>
             </li>
@@ -96,20 +99,19 @@ export default function App() {
     return (
         <div className="App">
             <h1>Task Manager</h1>
-            <p>You have {todo.length} {todo.length > 1 ? 'todos' : 'todo'}</p>
+            <p className="num-todo">You have {todo.length} {todo.length > 1 ? 'todos' : 'todo'}</p>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder='Buy milk'
                     ref={inputRef}
                     className="input-text"
-                />
+                /> 
             </form>
-            <button className="btn" onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear</button>
-            <button className="btn" onClick={() => dispatch({ type: 'ON_OFF' })}>On/Off</button>
+            <button className="btn" onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear all</button>
+            <button className="btn" onClick={() => dispatch({ type: 'ON_OFF' })}>Check On/Off</button>
 
             <select value={selected} onChange={(e: any) => setSelected(e.target.value)} className="select">
-                <option value="choose" selected>Choose</option>
                 <option value="all">All</option>
                 <option value="active">Active</option>
                 <option value="complete">Completed</option>

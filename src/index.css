@@ -5,9 +5,239 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(160, 33, 96);
+  display: flex;
+  justify-content: center;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+* {
+  margin: 0; 
+}
+
+.App {
+  background-color: rgb(38, 43, 54);
+  color: white;
+  width: 450px;
+  min-height: 300px;
+  text-align: center;
+  padding: 50px 0;
+  margin: 88px 0;
+}
+
+.input-text {
+  width: 320px;
+  padding: 12px;
+  padding-left: 18px;
+  font-size: 17px;
+  margin: 15px 0 24px 0;
+  background-color: rgb(22, 25, 29);
+  border: none;
+  color: rgb(206, 206, 206);
+  border-radius: 30px;
+}
+
+.input-text:focus {
+  outline: 0;
+}
+
+.btn {
+  border: none;
+  padding: 11px 15px;
+  margin: 0 6px;
+  background-color: rgb(155, 12, 71);
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: rgb(170, 37, 92);
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.select {
+  border: none;
+  padding: 10px;
+  margin-left: 6px;
+  background-color: rgb(155, 12, 71);
+  color: white;
+  cursor: pointer;
+  border-radius: 22px;
+  font-size: 14px;
+}
+
+select:focus {
+  outline: 0;
+}
+
+.delete, .edit {
+  border: none;
+  padding: 4px 6px;
+  margin: 0 2px;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.delete {
+  color:  rgb(190, 19, 19);
+}
+
+.edit {
+  color:  rgb(26, 206, 95);
+}
+ 
+.delete:hover{
+  color:  rgb(161, 31, 31);
+  cursor: pointer;
+}
+
+.edit:hover {
+  color:  rgb(11, 109, 49);
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin-top: 50px;
+  margin-right: 28px;
+}
+
+li {
+  margin: 13px;
+}
+
+.inline {
+  display: inline-block;
+  width: 200px;
+  text-align: left;
+  margin-left: 15px;
+  color: rgb(204, 204, 204);
+  font-size: 19px;
+}
+
+h1 {
+  margin: 13px;
+  font-family: 'Baloo Tamma 2', cursive;
+  font-size: 38px;
+  color: rgb(230, 228, 228);
+}
+
+.num-todo {
+  font-size: 18px;
+  margin: 14px;
+  color: rgb(204, 204, 204);
+}
+
+.checked {
+  display: inline-block;
+  width: 230px;
+  text-align: left;
+  margin-left: 40px;
+  color: rgb(204, 204, 204);
+  font-size: 18px;
+  text-decoration: line-through;
+  color: rgb(109, 109, 109);
+  font-style: italic;
+}
+
+.notChecked {
+  display: inline-block;
+  width: 230px;
+  text-align: left;
+  margin-left: 40px;
+  color: rgb(233, 233, 233);
+  font-size: 18px;
+}
+
+/* Styling Checkbox Starts */
+.checkbox-label {
+  display: block;
+  position: relative;
+  margin: auto;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 24px;
+  height: 24px;
+  width: 24px;
+  clear: both;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+  position: absolute;
+  top: 28px;
+  left: -153px;
+  height: 18px;
+  width: 18px;
+  background-color: transparent;
+  border-radius: 15px;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  border: 2px solid #FFFFFF;
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom {
+  background-color: rgb(219, 219, 219);
+  border-radius: 15px;
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+  opacity:1;
+  border: 2px solid #FFFFFF;
+}
+
+
+.checkbox-label .checkbox-custom::after {
+  position: absolute;
+  content: "";
+  left: 12px;
+  top: 12px;
+  height: 0px;
+  width: 0px;
+  border-radius: 15px;
+  border: solid #009BFF;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  opacity:1;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+-webkit-transform: rotate(45deg) scale(1);
+-ms-transform: rotate(45deg) scale(1);
+transform: rotate(45deg) scale(1);
+opacity:1;
+left: 5px;
+top: 0px;
+width: 6px;
+height: 12px;
+border: solid rgb(224, 4, 158);
+border-width: 0 2px 2px 0;
+background-color: transparent;
+border-radius: 0;
 }
