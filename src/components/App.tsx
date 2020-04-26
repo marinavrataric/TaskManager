@@ -89,9 +89,19 @@ export default function App() {
                     />
                     <span className="checkbox-custom"></span>
                 </label>
-                <p {...item.isCheck ? { className: 'checked' } : { className: 'notChecked' }}>{item.name}</p>
-                <button className="edit" onClick={() => handleEditing(index, item)}><i className="fa fa-pencil"></i></button>
-                <button className="delete" onClick={() => dispatch({ type: 'DELETE_TODO', id: index })}><i className="fa fa-trash"></i></button>
+                <p {...item.isCheck ? { className: 'checked' } : { className: 'notChecked' }}>
+                    {item.name}
+                </p>
+                <button
+                    className="edit"
+                    onClick={() => handleEditing(index, item)}>
+                    <i className="fa fa-pencil"></i>
+                </button>
+                <button
+                    className="delete"
+                    onClick={() => dispatch({ type: 'DELETE_TODO', id: index })}>
+                    <i className="fa fa-trash"></i>
+                </button>
             </li>
         )
     })
@@ -106,7 +116,7 @@ export default function App() {
                     placeholder='Buy milk'
                     ref={inputRef}
                     className="input-text"
-                /> 
+                />
             </form>
             <button className="btn" onClick={() => dispatch({ type: 'CLEAR_TODOS' })}>Clear all</button>
             <button className="btn" onClick={() => dispatch({ type: 'ON_OFF' })}>Check On/Off</button>
