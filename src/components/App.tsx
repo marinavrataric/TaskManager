@@ -24,7 +24,7 @@ export default function App() {
             case 'ADD_TODO':
                 setEditingIndex(null)
                 const tempState = [...state]
-                if (action.id) {
+                if (action.id || action.id === 0) {
                     tempState[action.id] = { ...tempState[action.id], name: action.payload }
                 }
                 else {
